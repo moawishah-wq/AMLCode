@@ -1,0 +1,34 @@
+{
+  "title": "Reproduction code for: Exact uncertainty subspaces for affine differential inclusions",
+  "upload_type": "software",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Al-Wishah, Moemal",
+      "affiliation": "Jordan High School, Fulshear, TX, USA"
+    },
+    {
+      "name": "Harish, Krishna",
+      "affiliation": "Elkins High School, Missouri City, TX, USA"
+    },
+    {
+      "name": "Moualla, Ali",
+      "affiliation": "Jordan High School, Fulshear, TX, USA"
+    },
+    {
+      "name": "Hagui, Muhammad",
+      "affiliation": "Woodbridge Senior High School, Woodbridge, VA, USA"
+    }
+  ],
+  "description": "Scripts reproducing the numerical values, tables and figure of the manuscript 'Exact uncertainty subspaces for affine differential inclusions' (submitted to Applied Mathematics Letters). reproduce.py regenerates Tables 1-2, Figure 1 and numerical_results.json; test_reproduce.py (pytest) checks the numerics against closed-form cases and then asserts agreement with the values and structural claims reported in the paper.",
+  "keywords": [
+    "reachability analysis",
+    "differential inclusions",
+    "support functions",
+    "controllable subspace",
+    "uncertainty quantification"
+  ],
+  "access_right": "open",
+  "version": "1.0.0",
+  "publication_date": "2026-07-26"
+}

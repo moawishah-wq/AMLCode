@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Reproduction code for: Exact uncertainty subspaces for affine differential inclusions"
+type: software
+authors:
+  - family-names: Al-Wishah
+    given-names: Moemal
+    affiliation: "Jordan High School, Fulshear, TX, USA"
+    email: mo.awishah@gmail.com
+  - family-names: Harish
+    given-names: Krishna
+    affiliation: "Elkins High School, Missouri City, TX, USA"
+  - family-names: Moualla
+    given-names: Ali
+    affiliation: "Jordan High School, Fulshear, TX, USA"
+  - family-names: Hagui
+    given-names: Muhammad
+    affiliation: "Woodbridge Senior High School, Woodbridge, VA, USA"
+license: MIT
+version: 1.0.0
+date-released: 2026-07-26
+abstract: >-
+  Scripts reproducing every numerical value, table and figure in
+  "Exact uncertainty subspaces for affine differential inclusions":
+  the damped-oscillator reachable set and its isotropic enclosures,
+  the three-agent consensus network and its conserved direction, and
+  the switching-disturbance example.
+keywords:
+  - reachability analysis
+  - differential inclusions
+  - support functions
+  - controllable subspace
