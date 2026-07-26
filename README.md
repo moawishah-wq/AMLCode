@@ -1,1 +1,76 @@
-# AMLCode
+Reproduction code: Exact uncertainty subspaces for affine differential inclusions
+Quick start
+```bash
+python -m pip install -r requirements.txt
+python reproduce.py          # writes outputs/
+pytest                       # creates fresh temporary outputs and verifies them
+```
+`reproduce.py [--out DIR] [--dirs N] [--nodes N]` writes:
+`numerical_results.json` at full precision
+`table_1.csv`
+`table_2.csv`
+`figure_1.pdf`
+`figure_1.png`
+The test suite does not depend on a pre-existing `outputs/` directory. It invokes the
+public command-line interface in a temporary directory, verifies that every declared file
+is created, and checks the numerical values and structural claims reported in the paper.
+This prevents stale results or silently skipped tests from producing a misleading pass.
+Typical runtime is a few seconds. Peak memory is dominated by Matplotlib and the blocked
+support-function quadrature. `--dirs` and `--nodes` trade accuracy against runtime and
+memory.
+Tested environment
+The release was tested with:
+```text
+Python 3.13.5
+NumPy 2.3.5
+Matplotlib 3.10.8
+pytest 9.0.2
+```
+`requirements.txt` gives portable minimum versions. `requirements-lock.txt` records the
+exact tested Python-package environment for stricter reproduction.
+Method
+For a segment disturbance, Eq. (4) of the paper gives
+```text
+h_R(T)(u) = eps * integral_0^T |<u, Phi(T,s)b>| ds,
+```
+which is a scalar integral for each direction, so no set is explicitly propagated. The
+oscillator transition matrix uses the underdamped closed form. The consensus transition
+matrix uses an eigendecomposition of the symmetric Laplacian, preserving the conserved
+`1^T z` direction to floating-point rounding rather than quadrature error. Planar areas are
+computed from the support function using
+```text
+A = 1/2 * integral (h^2 - (h')^2) dtheta.
+```
+The switching example is integrated in closed form.
+Table terminology
+Table 2 spans examples in both `R^2` and `R^3`. Its exported columns are therefore named
+`exact_ambient_measure` and `ball_ambient_measure`, rather than calling every quantity an
+area. For planar examples the measure is area; for the consensus example the ambient
+measure is three-dimensional volume. The exact consensus set has zero ambient measure,
+while every enclosing ball has positive ambient measure.
+Limitations
+`boundary_and_area` differentiates `h` by a central difference and therefore assumes a
+smooth support function. For a body with corners, the error degrades from `O(dtheta^2)`
+to `O(dtheta)`. `test_area_of_a_segment_is_only_first_order` demonstrates this by
+returning an area of roughly `4e-5` for a segment whose true area is zero. This does not
+affect the reported oscillator area, whose support function is smooth, or the switching
+rectangle area, which is computed in closed form. Widths never differentiate `h`.
+Only segment, one-generator disturbances are implemented. For a general compact convex
+`D(s)`, replace `|<u, Phi b>|` by `h_D(Phi^T u)`.
+Quadrature and angular sampling are uniform.
+Corrections retained in this release
+The oscillator disturbance is the segment `{0} x [-eps, eps]`, because the scalar force
+enters only the acceleration coordinate. It is not the disc `eps B_2`.
+The consensus generator is normalised as `(1,-1,0)^T / sqrt(2)`, matching the model and
+the reported widths.
+Verification scope
+The suite checks all files, all displayed example dimensions, all displayed widths and
+half-widths, all Table 1 radii, areas and ratios, the switching values, the conserved
+consensus direction, the dimension-neutral Table 2 headings, and agreement between the
+CSV exports and the full-precision JSON results.
+Depositing
+Create a Zenodo software upload and add this folder as a ZIP archive.
+Copy the metadata from `.zenodo.json` and verify the release date before publishing.
+Publish the record, then replace `10.5281/zenodo.XXXXXXX` in the manuscript's Data
+Availability statement with the assigned DOI.
+The release metadata in this bundle uses version `1.0.0` and date `2026-07-26`.
